@@ -112,7 +112,7 @@ public class SearchAndSort {
     public static void main(String[] args) {
         System.out.println("Searching and sorting algorithms");
         ArrayList<Integer> someList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             someList.add(RNG.nextInt(20));
             System.out.print(someList.get(i) + " ");
         }
