@@ -18,12 +18,14 @@ public class SearchAndSort {
 
     /**
      * This method determines the index of the first integer in a list of
-     * integers that matches a given integer. The method should return -1 if no
-     * match is found. Use the sequential search algorithm.
+     * unsorted integers that matches a given integer. The method should return
+     * -1 if no match is found. It uses a sequential search algorithm. Although
+     * its time complexity performance is quite poor, and it can be used on an
+     * unsorted list of integers (unlike binary search).
      *
-     * @param valuesList the list of integers to be searched
-     * @param value the integer to search for
-     * @return the index of the value in the list
+     * @param valuesList a list of integers to be searched.
+     * @param value an integer to search for.
+     * @return an index; the index in the list of the desired value.
      */
     public static int getIndex(List<Integer> valuesList, int value) {
 
@@ -39,13 +41,15 @@ public class SearchAndSort {
     } //getIndex
 
     /**
-     * This method determines the index of the first integer in a list of
+     * This method determines the index of a desired integer in a list of sorted
      * integers that matches a given integer, using binary search. The method
-     * should return -1 if no match is found
+     * should return -1 if no match is found. It has a better time complexity
+     * performance than getIndex (sequential or linear search), but it requires
+     * that the list that is being searched is sorted in ascending order.
      *
-     * @param valuesList the sorted list of integers (ASC) to be searched
-     * @param value the integer to search for
-     * @return the index of the value in the list
+     * @param valuesList a sorted list of integers (ascending) to be searched.
+     * @param value an integer to search for.
+     * @return an index; the index in the list of the desired value.
      */
     public static int getIndexBinary(List<Integer> valuesList, int value,
             int min, int max) {
@@ -64,10 +68,15 @@ public class SearchAndSort {
     }
 
     /**
-     * This method performs selection sort on an ArrayList of integers.
+     * This method performs selection sort on an ArrayList of integers. In the
+     * first pass-through, the smallest number will be sorted to the first
+     * position in the array list. After the second pass, the first two
+     * positions will be correct; after the third, the first three positions
+     * will be correct; and so on and so forth. It has a worst-case time
+     * complexity of O(n^2).
      *
-     * @param unsortedList an unsorted ArrayList
-     * @return the sorted ArrayList, in ascending order
+     * @param unsortedList an unsorted ArrayList.
+     * @return a sorted ArrayList, in ascending order.
      */
     public static ArrayList<Integer> selectionSort(
             ArrayList<Integer> unsortedList) {
@@ -84,13 +93,13 @@ public class SearchAndSort {
     }//selectionSort
 
     /**
-     * This method searches for the smallest value in part of an ArrayList. It
-     * is a helper function for selectionSort().
+     * This method searches for the smallest value in part (from index min to
+     * index max) of an ArrayList. It is a helper method for selectionSort().
      *
-     * @param someList the ArrayList of integers to search
-     * @param min the minimum index to search from
-     * @param max the maximum index to search to
-     * @return the index of the smallest number in the ArrayList
+     * @param someList an ArrayList of integers to search.
+     * @param min a minimum index to search from.
+     * @param max a maximum index to search to.
+     * @return an index; the index of the smallest number in the ArrayList
      */
     public static int selectionHelper(ArrayList<Integer> someList, int min,
             int max) {
@@ -105,8 +114,21 @@ public class SearchAndSort {
         return index;
     }
 
-    // TO-DO: Define a method that sorts a list
-    // of integers using the insertion sort algorithm.
+    /**
+     * This method performs insertion sort on an ArrayList of integers. In the
+     * first pass-through, the first two positions will be sorted correctly
+     * relatively to themselves. After the second pass, the first three
+     * positions will be correct relative to themselves; after the third, the
+     * first four positions will be correct relative to themselves; and so on and
+     * so forth. For example, when the first seven positions are correctly sorted,
+     * and on the next pass the eighth value is smaller than any of them, it will
+     * be swapped with each value in turn until it is in its correct position in
+     * the first position in the ArrayList. Insertion sort has a worst-case time
+     * complexity of O(n^2).
+     *
+     * @param unsortedList an unsorted ArrayList.
+     * @return a sorted ArrayList, in ascending order.
+     */
     public static ArrayList<Integer> insertionSort(
             ArrayList<Integer> unsortedList) {
         ArrayList<Integer> sortedList = unsortedList;
@@ -125,7 +147,22 @@ public class SearchAndSort {
         }//if
         return unsortedList;
     }
-
+ 
+    /**
+     * This is a helper method for insertion sort that assesses whether two values
+     * in an ArrayList ought to be swapped; if so, it swaps them. If it performs
+     * the swap, it returns a Boolean true, if it does not, it returns a Boolean
+     * false. This helps the insertionSort method determine whether to ask the
+     * Swap method to do a subsequent swap; if Swap() returns a false value to
+     * insertionSort, it knows that the value is now its correct position within
+     * the ArrayList.
+     * 
+     * @param someList an ArrayList, in which two values must be swapped
+     * @param firstIndex the index of the first value of a pair to be (assessed
+     * and then depending on the result) swapped.
+     * @return an ArrayList, in which the two values specified will be swapped
+     * if the first of the two values was greater than the second.
+     */
     public static boolean Swap(ArrayList<Integer> someList, int firstIndex) {
         if (someList.get(firstIndex) > someList.get(firstIndex + 1)) {
             int helper = someList.get(firstIndex);
@@ -138,20 +175,23 @@ public class SearchAndSort {
         }//Else
 
     }//Swap
-    
-    /** This is a helper method that handles the merging of two sorted sublists in
-     * mergeSort. It loops from i to max, each time choosing the value at index
-     * i from either the first or second sorted sublist. The value chosen will be
-     * whichever value is lowest. Once it has finished selecting all values from
-     * either the first or second sublist, the rest of the merge is completed by
-     * filling in all of the remaining values from the other sublist.
-     * @param unmergedList the unmerged ArrayList. It should have two unmerged, 
+
+    /**
+     * This is a helper method that handles the merging of two sorted sublists
+     * in mergeSort. It loops from i to max, each time choosing the value at
+     * index i from either the first or second sorted sublist. The value chosen
+     * will be whichever value is lowest. Once it has finished selecting all
+     * values from either the first or second sublist, the rest of the merge is
+     * completed by filling in all of the remaining values from the other
+     * sublist.
+     *
+     * @param unmergedList the unmerged ArrayList. It should have two unmerged,
      * sorted parts to be merged together.
      * @param min the index of the beginning of the first sorted part.
      * @param mid the index of the beginning of the second sorted part.
      * @param max the index ( +1 ) of the end of the second sorted part.
-     * @return an ArrayList that is sorted in ascending order (for indices min to
-     * max).
+     * @return an ArrayList that is sorted in ascending order (for indices min
+     * to max).
      */
     public static ArrayList<Integer> merge(ArrayList<Integer> unmergedList,
             int min, int mid, int max) {
@@ -185,9 +225,10 @@ public class SearchAndSort {
         return mergedList;
     } //merge
 
-    /**This method performs a merge sort on an ArrayList of integers, using
+    /**
+     * This method performs a merge sort on an ArrayList of integers, using
      * recursion.
-     * 
+     *
      * @param unsortedList the ArrayList of integers to be sorted.
      * @param min the minimum index to sort from. At the top level, this will
      * usually be index 0. For recursion within the method, it could take any
