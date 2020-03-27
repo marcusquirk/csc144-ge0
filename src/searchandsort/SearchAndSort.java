@@ -138,20 +138,87 @@ public class SearchAndSort {
         }//Else
 
     }//Swap
+    
+    /** This is a helper method that handles the merging of two sorted sublists in
+     * mergeSort. It loops from i to max, each time choosing the value at index
+     * i from either the first or second sorted sublist. The value chosen will be
+     * whichever value is lowest. Once it has finished selecting all values from
+     * either the first or second sublist, the rest of the merge is completed by
+     * filling in all of the remaining values from the other sublist.
+     * @param unmergedList the unmerged ArrayList. It should have two unmerged, 
+     * sorted parts to be merged together.
+     * @param min the index of the beginning of the first sorted part.
+     * @param mid the index of the beginning of the second sorted part.
+     * @param max the index ( +1 ) of the end of the second sorted part.
+     * @return an ArrayList that is sorted in ascending order (for indices min to
+     * max).
+     */
+    public static ArrayList<Integer> merge(ArrayList<Integer> unmergedList,
+            int min, int mid, int max) {
+        ArrayList<Integer> mergedList = (ArrayList<Integer>) unmergedList.clone();
+        int j = min;
+        int k = mid;
+        int i = min;
+        while (j < mid && k < max) {
+            if (unmergedList.get(j) < unmergedList.get(k)) {
+                mergedList.set(i, unmergedList.get(j));
+                j++;
+                i++;
+            } else {
+                mergedList.set(i, unmergedList.get(k));
+                k++;
+                i++;
+            } //if-else
+        } //while
 
-    // TO-DO: Define a method that sorts a list
-    // of integers using the merge sort algorithm.
-    
-    
+        while (j < mid) {
+            mergedList.set(i, unmergedList.get(j));
+            j++;
+            i++;
+        } //while
+
+        while (k < max) {
+            mergedList.set(i, unmergedList.get(k));
+            k++;
+            i++;
+        } //while
+        return mergedList;
+    } //merge
+
+    /**This method performs a merge sort on an ArrayList of integers, using
+     * recursion.
+     * 
+     * @param unsortedList the ArrayList of integers to be sorted.
+     * @param min the minimum index to sort from. At the top level, this will
+     * usually be index 0. For recursion within the method, it could take any
+     * index in the unsorted list.
+     * @param max the maximum index to sort to. At the top level, this will
+     * usually the size of the ArrayList. For recursion within the method, it
+     * could take any index in the unsorted list.
+     * @return a sorted ArrayList (for indices min to max).
+     */
+    public static ArrayList<Integer> mergeSort(ArrayList<Integer> unsortedList,
+            int min, int max) {
+        if (min == max - 1) {
+            return unsortedList;
+        }
+        int mid = (max + min) / 2;
+        ArrayList<Integer> sortedList = mergeSort(unsortedList, min, mid);
+        sortedList = mergeSort(sortedList, mid, max);
+        sortedList = merge(sortedList, min, mid, max);
+        return sortedList;
+    }
+
     /**
      * The main method allows the user to test the different searching and
      * sorting algorithms. It generates a random ArrayList of 15 elements, each
      * a random integer from 1-19. It then asks the user what kind of method
      * they would like to test. If the input is not recognised, the user is
-     * recommended to input 'h' to receive help about what inputs are valid.
-     * The valid inputs allow the user to test insertion sort, selection sort,
-     * merge sort, linear search, and binary search.
-     * @param args 
+     * recommended to input 'h' to receive help about what inputs are valid. The
+     * valid inputs allow the user to test insertion sort, selection sort, merge
+     * sort, linear search, and binary search.
+     *
+     * @param args
      */
     public static void main(String[] args) {
         System.out.println("Searching and sorting algorithms");
@@ -225,6 +292,16 @@ public class SearchAndSort {
                     num = input.nextInt(); //wait for user to input an integer
                     System.out.println("The index of " + num + " in the sorted ArrayList is "
                             + getIndexBinary(someList, num, 0, someList.size()));
+                    break;
+                case "m":
+                case "merge":
+                case "merge sort":
+                    sortedList = mergeSort(someList, 0, someList.size());
+                    System.out.println("Sorted list:");
+                    for (int i = 0; i < sortedList.size(); i++) {
+                        System.out.print(sortedList.get(i) + " ");
+
+                    }//for
                     break;
                 case "no":
                 case "bye":
