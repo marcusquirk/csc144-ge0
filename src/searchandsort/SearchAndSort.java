@@ -6,22 +6,101 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
+ * <p> This class contains some search and sort algorithms as methods, namely:
+ * linear search, binary search, selection sort, insertion sort, and merge sort
+ * (as well as some helper methods to support them). I found that writing such
+ * algorithms was a great way to familiarise myself with Java. Learning
+ * Java syntax and concepts, such as classes, methods, and interfaces, was just as
+ * (if not more) challenging than actually figuring out how to code and implement
+ * the algorithms. </p>
  *
- * This program has some selection and sort algorithms.
+ * 
+ * <p> The process of generating random numbers is an example of a
+ * difference between Java and Python. Having now used it in this project, it
+ * seems trivial,
+ * but it took me some time to wrap my head around it: you have to to create
+ * an object/instance of the class Random in order to use its methods, such as
+ * nextInt(). </p>
  *
- * @author marcus
+ * 
+ * <p> This is similar to having to create an instance of the list class to
+ * create an ArrayList. In Python, creating a list, array, or dictionary was
+ * almost as simple as changing what kind of brackets () {} [] you used, but in
+ * Java it takes a little bit more 'work'.</p>
+ *
+ * <p> Other differences between Python and Java that I had to get used to are
+ * differences
+ * that I am sure my classmates will have run into as well: the use of
+ * semi-colons at the end of each 'line' of code; the definitions of classes and
+ * methods (specifying up-front the data type to be returned); and the syntax of
+ * If statements and For loops. </p>
+ *
+ * 
+ * <p> My principal extension to the project was partly to aid my testing of the
+ * methods that I wrote; I wanted to further practise coding a program
+ * that responds to user input (you may recall my earlier post to Piazza about
+ * this). I wanted the program to ask the user what they wanted to do, then do it.
+ * </p>
+ * 
+ * <p> In all honesty, I am not completely satisfied with my final
+ * implementation. Presently, the main method of the program generates a random
+ * ArrayList of integers, and then asks the user what action they would like to
+ * perform. The user's input (for example 'insertion', 's', or 'binary')
+ * determines which method is performed on the ArrayList. </p>
+ *
+ * 
+ * <p> My implementation relies on a switch/case statement, with various possible
+ * inputs accounted for. For example, the user can ask for a binary search with
+ * any of the inputs 'b', 'B', 'binary', 'binary search', 'BinARy SEarCh'.
+ * At first, I enjoyed the flexibility of this approach. As you can see in my code,
+ * the number of
+ * case statements eventually became cumbersome. </p>
+ *
+ * 
+ * <p> I also thought that switch/case statements would be a good way to handle
+ * unwanted or unexpected
+ * user input, because the default case would simply loop the prompt for input.
+ * While this works, the code is still not as 'clean' (for a lack of a better
+ * word) than I would have liked. Furthermore, some methods required a
+ * second input; binary search needs the user to choose an integer value to
+ * search for. This would require nested loops and switch/case statements to catch
+ * unexpected values. I couldn't quite wrap my head around how to implement this
+ * so I eventually left it -- so it is currently possible to 'break' the program
+ * by
+ * giving it a string when it expects an integer. </p>
+ *
+ * 
+ * <p> Any recommendations on a better implementation for asking for user input
+ * would be very welcome. </p>
+ *
+ * 
+ *<p> As it stands, I am glad I got a working version of it working -- not least
+ * because it enabled me to quickly and smoothly test my sorting methods. I
+ * wrote the main method before I wrote the sorting methods, so I enjoyed testing
+ * the sorts with the working version of my main method. Additionally, I
+ * now have a better handle on switch/case statements. </p>
+ *
+ * 
+ * @author Marcus Quirk
  * @version 27 March 2020
+ *
  */
 public class SearchAndSort {
 
     private static final Random RNG = new Random();
 
     /**
-     * This method determines the index of the first integer in a list of
-     * unsorted integers that matches a given integer. The method should return
-     * -1 if no match is found. It uses a sequential search algorithm. Although
-     * its time complexity performance is quite poor, and it can be used on an
-     * unsorted list of integers (unlike binary search).
+     * This method determines the index of a given integer in a list of unsorted
+     * integers. It returns the index of the first instance of the integer; it
+     * does not care for multiple matches. The method should return -1 if no
+     * match is found. It uses a sequential search algorithm. This is
+     * straightforward to understand; the algorithm passes through the list and
+     * checks every single element for a match. As soon as it finds a match, it
+     * returns the index at which it found a match. If it gets all the way
+     * through the list without finding a match, it returns an index of -1.
+     * Although its worst-case time complexity performance is quite poor (it has
+     * to check every single element), it can be used on an unsorted list of
+     * integers (unlike binary search).
      *
      * @param valuesList a list of integers to be searched.
      * @param value an integer to search for.
@@ -41,11 +120,18 @@ public class SearchAndSort {
     } //getIndex
 
     /**
-     * This method determines the index of a desired integer in a list of sorted
-     * integers that matches a given integer, using binary search. The method
-     * should return -1 if no match is found. It has a better time complexity
-     * performance than getIndex (sequential or linear search), but it requires
-     * that the list that is being searched is sorted in ascending order.
+     * This method determines the index of a given integer in a list of sorted
+     * integers, using binary search. The method should return -1 if no match is
+     * found. The binary search algorithm works by splitting the list in half
+     * each time, then choosing which half could contain the chosen integer.
+     * Because the list is sorted, it can tell which half of the list will
+     * contain the integer (if it is present at all). If it narrows its search
+     * down to one possible index, and the integer is not in that position, it
+     * determines that the integer must not be in the list at all and returns a
+     * -1. It has a better worst-case time complexity performance than getIndex
+     * (sequential or linear search), but it requires that the list that is
+     * being searched is sorted in ascending order, which is a potential
+     * limitation.
      *
      * @param valuesList a sorted list of integers (ascending) to be searched.
      * @param value an integer to search for.
@@ -69,11 +155,12 @@ public class SearchAndSort {
 
     /**
      * This method performs selection sort on an ArrayList of integers. In the
-     * first pass-through, the smallest number will be sorted to the first
-     * position in the array list. After the second pass, the first two
-     * positions will be correct; after the third, the first three positions
-     * will be correct; and so on and so forth. It has a worst-case time
-     * complexity of O(n^2).
+     * first pass-through, the smallest number in the list will be sorted to the
+     * first position in the array list. This is achieved by swapping whatever
+     * number is in the first position with the smallest number in the whole
+     * list. After the second pass, the first two positions will be correct;
+     * after the third, the first three positions will be correct; and so on and
+     * so forth. It has a worst-case time complexity of O(n^2).
      *
      * @param unsortedList an unsorted ArrayList.
      * @return a sorted ArrayList, in ascending order.
@@ -93,8 +180,8 @@ public class SearchAndSort {
     }//selectionSort
 
     /**
-     * This method searches for the smallest value in part (from index min to
-     * index max) of an ArrayList. It is a helper method for selectionSort().
+     * This method searches for the smallest value in part of an ArrayList, from
+     * index min to index max. It is a helper method for selectionSort().
      *
      * @param someList an ArrayList of integers to search.
      * @param min a minimum index to search from.
@@ -119,12 +206,12 @@ public class SearchAndSort {
      * first pass-through, the first two positions will be sorted correctly
      * relatively to themselves. After the second pass, the first three
      * positions will be correct relative to themselves; after the third, the
-     * first four positions will be correct relative to themselves; and so on and
-     * so forth. For example, when the first seven positions are correctly sorted,
-     * and on the next pass the eighth value is smaller than any of them, it will
-     * be swapped with each value in turn until it is in its correct position in
-     * the first position in the ArrayList. Insertion sort has a worst-case time
-     * complexity of O(n^2).
+     * first four positions will be correct relative to themselves; and so on
+     * and so forth. For example, when the first seven positions are correctly
+     * sorted, and on the next pass the eighth value is smaller than any of
+     * them, it will be swapped with each value in turn until it is in its
+     * correct position in the first position in the ArrayList. Insertion sort
+     * has a worst-case time complexity of O(n^2).
      *
      * @param unsortedList an unsorted ArrayList.
      * @return a sorted ArrayList, in ascending order.
@@ -147,16 +234,16 @@ public class SearchAndSort {
         }//if
         return unsortedList;
     }
- 
+
     /**
-     * This is a helper method for insertion sort that assesses whether two values
-     * in an ArrayList ought to be swapped; if so, it swaps them. If it performs
-     * the swap, it returns a Boolean true, if it does not, it returns a Boolean
-     * false. This helps the insertionSort method determine whether to ask the
-     * Swap method to do a subsequent swap; if Swap() returns a false value to
-     * insertionSort, it knows that the value is now its correct position within
-     * the ArrayList.
-     * 
+     * This is a helper method for insertion sort that assesses whether two
+     * values in an ArrayList ought to be swapped; if so, it swaps them. If it
+     * performs the swap, it returns a Boolean true, if it does not, it returns
+     * a Boolean false. This helps the insertionSort method determine whether to
+     * ask the Swap method to do a subsequent swap; if Swap() returns a false
+     * value to insertionSort, it knows that the value is now its correct
+     * position within the ArrayList.
+     *
      * @param someList an ArrayList, in which two values must be swapped
      * @param firstIndex the index of the first value of a pair to be (assessed
      * and then depending on the result) swapped.
