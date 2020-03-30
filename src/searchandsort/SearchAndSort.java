@@ -8,39 +8,74 @@ import java.util.Scanner;
 /**
  * <p> This class contains some search and sort algorithms as methods, namely:
  * linear search, binary search, selection sort, insertion sort, and merge sort
- * (as well as some helper methods to support them). I found that writing such
- * algorithms was a great way to familiarise myself with Java. Learning
- * Java syntax and concepts, such as classes, methods, and interfaces, was just as
- * (if not more) challenging than actually figuring out how to code and implement
- * the algorithms. </p>
- *
+ * (as well as some helper methods to support them). </p>
  * 
- * <p> The process of generating random numbers is an example of a
- * difference between Java and Python. Having now used it in this project, it
- * seems trivial,
- * but it took me some time to wrap my head around it: you have to to create
- * an object/instance of the class Random in order to use its methods, such as
- * nextInt(). </p>
+ * <b> Coding this project </b>
+ * <p> I found that writing such algorithms was a great way to familiarise myself
+ * with Java. Learning Java syntax and concepts, such as classes, methods, and
+ * interfaces, was just as (if not more) challenging than actually figuring out
+ * how to code and implement the algorithms. </p>
+ * 
+ * <p> That being said, I made a point of writing my algorithms from scratch,
+ * without looking at anyone else's code until I was finished with my
+ * implementation. I believe that, this way, I ensured that I fully understood
+ * and grasped the methods I was coding. By writing all of the code from the
+ * ground up, I necessarily had an understanding of it all. I think that if I had
+ * allowed myself to copy a part of it, I would not completely understand it. No
+ * matter how hard I convinced myself that I had read it and internalised it, my
+ * familiarity and understanding would not be as complete as if I had written it
+ * myself -- because I wouldn't have come up with it! </p>
+ * 
+ * <p> Of course, if ever I would have been truly stumped about a method, I would
+ * have of course looked to others for guidance; I am not at all trying to say
+ * that borrowing code is a bad thing! Reading other people's solutions to
+ * problems can spark ideas and understanding. I would have surely looked up code
+ * for these methods if I got stuck. On that note, I am pleased with myself that
+ * this was not necessary. </p>
+ * 
+ * <p> As a result (albeit unintended), my code can hopefully now be a resource
+ * as an alternate way of coding this algorithms -- that is, if my version is
+ * adequate. I do know my code works and executes the algorithms correctly, but I
+ * haven't checked if my implementation is the most efficient way of doing it. For
+ * example, I had a discussion on Piazza with Chase and Jack about merge sort and
+ * we all three had slightly differing ways of implementing it. I will admit I was
+ * surprised by how similar our versions were, but there were some key differences
+ * in implementation; I opted to use one list with two subparts, while they opted
+ * to merge two separate list objects. </p>
+ * 
+ * <p> If my code is not the best way of doing it then perhaps it can serve as an
+ * example to others of what not to do! </p>
  *
+ * <b> First experiences with Java </b>
+ * <p> Coding Java is definitely a different experience to coding in Python. I
+ * felt like Python is more 'verbose', if that makes sense. Java, on the other
+ * hand, is much more involved. The process of generating random numbers is an
+ * example of a difference between Java and Python. Having now used it in this project, it
+ * seems trivial, but it took me some time to wrap my head around it: in Java, you
+ * have to create an object/instance of the class Random in order to use its
+ * methods (such as nextInt()). In Python, it was as simple as calling 
+ * Random.randint().</p>
  * 
  * <p> This is similar to having to create an instance of the list class to
  * create an ArrayList. In Python, creating a list, array, or dictionary was
  * almost as simple as changing what kind of brackets () {} [] you used, but in
- * Java it takes a little bit more 'work'.</p>
+ * Java it takes a little bit more 'work' -- you must create an instance of the
+ * class list.</p>
  *
  * <p> Other differences between Python and Java that I had to get used to are
- * differences
- * that I am sure my classmates will have run into as well: the use of
+ * differences that I am sure my classmates will have run into as well: the use of
  * semi-colons at the end of each 'line' of code; the definitions of classes and
  * methods (specifying up-front the data type to be returned); and the syntax of
  * If statements and For loops. </p>
  *
- * 
+ * <b> Adding to the project </b>
  * <p> My principal extension to the project was partly to aid my testing of the
  * methods that I wrote; I wanted to further practise coding a program
  * that responds to user input (you may recall my earlier post to Piazza about
  * this). I wanted the program to ask the user what they wanted to do, then do it.
- * </p>
+ * Of course, it was in the Grading Exercise instructions that our main method
+ * should include code to test our methods. However, I wanted to add to it just
+ * slightly so that I could include user input. </p>
  * 
  * <p> In all honesty, I am not completely satisfied with my final
  * implementation. Presently, the main method of the program generates a random
@@ -53,21 +88,19 @@ import java.util.Scanner;
  * inputs accounted for. For example, the user can ask for a binary search with
  * any of the inputs 'b', 'B', 'binary', 'binary search', 'BinARy SEarCh'.
  * At first, I enjoyed the flexibility of this approach. As you can see in my code,
- * the number of
- * case statements eventually became cumbersome. </p>
+ * the number of case statements eventually became cumbersome, so I am not sure
+ * that I chose the correct approach. </p>
  *
  * 
  * <p> I also thought that switch/case statements would be a good way to handle
- * unwanted or unexpected
- * user input, because the default case would simply loop the prompt for input.
- * While this works, the code is still not as 'clean' (for a lack of a better
- * word) than I would have liked. Furthermore, some methods required a
- * second input; binary search needs the user to choose an integer value to
+ * unwanted or unexpected user input, because the default case would simply loop
+ * the prompt for input. While this works, the code is still not as 'clean' (for a
+ * lack of a better word) than I would have liked. Furthermore, some methods
+ * required a second input; binary search needs the user to choose an integer value to
  * search for. This would require nested loops and switch/case statements to catch
  * unexpected values. I couldn't quite wrap my head around how to implement this
  * so I eventually left it -- so it is currently possible to 'break' the program
- * by
- * giving it a string when it expects an integer. </p>
+ * by giving it a string when it expects an integer. </p>
  *
  * 
  * <p> Any recommendations on a better implementation for asking for user input
@@ -79,6 +112,18 @@ import java.util.Scanner;
  * wrote the main method before I wrote the sorting methods, so I enjoyed testing
  * the sorts with the working version of my main method. Additionally, I
  * now have a better handle on switch/case statements. </p>
+ * 
+ * <b> Extra notes about the first week </b>
+ * <p> I have noticed this in my previous Computer Science classes at Cornell
+ * College, but never has it been so evident as it has been when working with
+ * Java: in British English, we call ( and ) brackets, [ and ] square brackets,
+ * and { and } are curly brackets. I am still not entirely sure what a 
+ * parenthesis (parenthese? I'm not sure how to spell it either) is, but I think
+ * it is just a regular bracket. (Although a 'regular' bracket in the US might be
+ * square, I think.) In any case, because python uses brackets so much more than
+ * Python, it has given discussion about code somewhat of a je ne sais quoi. Not
+ * 'difficulty', because it quickly becomes apparent what kind of bracket people
+ * are talking about. Perhaps the word I am looking for is 'amusing'. </p>
  *
  * 
  * @author Marcus Quirk
